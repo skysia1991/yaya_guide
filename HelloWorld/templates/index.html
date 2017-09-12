@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="User Guide">
+    <meta name="author" content="LI Xueyu">
+    <title>User Guide</title>
+    <link href="/static/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/static/css/main.css" rel="stylesheet" type="text/css">
+    <link href="/static/css/new-style.css" rel="stylesheet" type="text/css">
+    <link href="/static/css/components.min.css" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]>
+    <script src="static/scripts/html5shiv.js"></script>
+    <script src="static/scripts/respond.min.js"></script>
+    <![endif]-->
+    <script src="/static/node_modules/angular/angular.js"></script>
+    {% block extrahead %}{% endblock %}
+
+</head>
+<body data-spy="scroll" data-target="#navbar" data-offset="0" ng-app="userGuide">
+    <section id="main-slider" class="carousel">
+        <div class="carousel-inner">
+            <div class="item active">
+                <div class="container">
+                    <div class="carousel-content">
+                        <h1>Welcome to User Guide</h1>
+                        <p class="lead">It will guide you to figure out the business problem step by step</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% block content %}
+    <section id="problem_type" ng-controller="homeCtrl">
+        <div class="container">
+            <div class="box first">
+                <h4 style="margin-bottom: 30px; text-align: center; font-weight: bold">Please select the most appropriate description of your problem</h4>
+                <div class="row">
+                    <div class="col-md-4 col-sm-6">
+                        <div class="center">
+                            <!--<i class="icon-apple icon-md icon-color1"></i>-->
+                            <h4>Classification</h4>
+							<p>Identifying to which category an object belongs to. <br><br>
+							  <strong>Applications</strong>: Predicting user's gender </p>
+                            <a class="button button--antiman button--round-l button-text-medium button-bg" href="{% url 'submit_data' problem_type='1' %}">
+                                <i class="button__icon icon fa fa-check"></i>
+                                <span id="classification">Select</span>
+                            </a>
+
+                        </div>
+                    </div><!--/.col-md-4-->
+                    <div class="col-md-4 col-sm-6">
+                        <div class="center">
+                            <!--<i class="icon-android icon-md icon-color2"></i>-->
+                            <h4>Regression</h4>
+							<p>Predicting a real-valued attribute of an object. <br><br>
+							<strong>Applications</strong>: Predicting a user's income                   </p>
+                            <a class="button button--antiman button--round-l button-text-medium button-bg" href="{% url 'submit_data' problem_type='2' %}">
+                                <i class="button__icon icon fa fa-check"></i>
+                                <span id="regression">Select</span>
+                            </a>
+                        </div>
+                    </div><!--/.col-md-4-->
+                    <div class="col-md-4 col-sm-6">
+                        <div class="center">
+                            <!--<i class="icon-windows icon-md icon-color3"></i>-->
+                            <h4>Ranking</h4>
+							<p>Predicting the rank of some given candidates. <br><br>
+							<strong>Applications</strong>: web page search</p>
+                            <a class="button button--antiman button--round-l button-text-medium button-bg" href="{% url 'submit_data' problem_type='1' %}">
+                                <i class="button__icon icon fa fa-check"></i>
+                                <span id="sort">Select</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endblock %}
+
+    <footer id="footer">
+        <div class="container">
+            <div class="row">
+                2017 &copy; UserGuide By <a href="#">Lenovo</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/static/node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="/static/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/static/scripts/mainCtrl.js" type="text/javascript"></script>
+
+</body>
+</html>

@@ -1,0 +1,98 @@
+{% extends "index.html" %}
+{% block extrahead %}
+    {% load staticfiles %}
+{% endblock %}
+
+{% block content %}
+    <section id="type_select">
+        <div class="container">
+            <div class="box first">
+                <h4 style="margin-bottom: 30px; font-weight: bold">Please assign the data type to each column of your data </h4>
+                <div class="table-label">
+                    <div class="label-item number"></div> <i>Number</i>
+                    <div class="label-item string"></div> <i>String</i>
+                    <div class="label-item dateTime"></div> <i>Date Time</i>
+                </div>
+                <div class="table-scrollable">
+                    <form role="form" method="post" action="/save_feature_type/" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <table class="table table-striped table-bordered table-advance table-hover">
+                            <thead>
+                            <tr>
+                                <th class="sbold">Label </th>
+                                <th class="sbold"> Data Type </th>
+                                <th class="sbold" colspan="2"> Sample </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for item in sample %}
+                                <tr>
+                                    <td class="highlight">
+                                        {% if item.default_value == 'Number' %}
+                                        <div class="success"></div>
+                                        {% elif item.default_value == 'String' %}
+                                        <div class="warning"></div>
+                                        {% elif item.default_value == 'DateTime' %}
+                                        <div class="info"></div>
+                                        {% endif %}
+{#                                        <div class="success"></div>#}
+                                        <i class="row-title">{{ item.header_line }}</i>
+                                    </td>
+                                    <td class="">
+{#                                        <select name="{{ item.header_line }}" class="form-control">#}
+{#                                            <option value="数值型">Number</option>#}
+{#                                            <option value="离散型">String</option>#}
+{#                                            <option value="时间型">Date Time</option>#}
+{#                                        </select>#}
+                                        <label class="mt-radio mt-radio-outline type-radio">
+                                            <small>Number</small>
+                                            {% if item.default_value == 'Number' %}
+                                            <input type="radio" value="数值型" name="{{ item.header_line }}" ng-checked='1'>
+                                            {% else %}
+                                            <input type="radio" value="数值型" name="{{ item.header_line }}" ng-checked='0'>
+                                            {% endif %}
+{#                                            <input type="radio" value="数值型" name="{{ item.header_line }}">#}
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-radio mt-radio-outline type-radio">
+                                            <small>String</small>
+                                            {% if item.default_value == 'String' %}
+                                            <input type="radio" value="离散型" name="{{ item.header_line }}" ng-checked='1'>
+                                            {% else %}
+                                            <input type="radio" value="离散型" name="{{ item.header_line }}" ng-checked='0'>
+                                            {% endif %}
+{#                                            <input type="radio" value="离散型" name="{{ item.header_line }}">#}
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-radio mt-radio-outline type-radio">
+                                            <small>Date Time</small>
+                                            {% if item.default_value == 'DateTime' %}
+                                            <input type="radio" value="时间型" name="{{ item.header_line }}" ng-checked='1'>
+                                            {% else %}
+                                            <input type="radio" value="时间型" name="{{ item.header_line }}" ng-checked='0'>
+                                            {% endif %}
+{#                                            <input type="radio" value="时间型" name="{{ item.header_line }}">#}
+                                            <span></span>
+
+                                        </label>
+                                    </td>
+                                    <td class="">
+                                        {{ item.first_line }}
+                                    </td>
+                                    <td class="">
+                                        {{ item.second_line }}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                        <button class="button button--antiman button--round-l button-text-medium button-bg" type="submit">
+                            <i class="button__icon icon fa fa-check"></i>
+                            <span>Submit</span>
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+{% endblock %}
